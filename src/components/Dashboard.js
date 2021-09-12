@@ -3,6 +3,7 @@ import app from '../firebase'
 import {useAuth} from '../contexts/AuthContext'
 import { Link,useHistory } from 'react-router-dom';
 import {Card,Form,Button, Alert} from 'react-bootstrap'
+import PrivateRoute from './PrivateRoute';
 
 function Dashboard() {
     const [name,setName]=useState('');
@@ -38,6 +39,7 @@ async function handleLogout() {
 
     try {
       await logout()
+      localStorage.removeItem('email')
       history.push("/login")
     } catch {
       setError("Failed to log out")
